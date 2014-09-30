@@ -1,5 +1,5 @@
 # coding:utf-8
-# let's fuck
+
 import urllib
 import urllib2
 import cookielib
