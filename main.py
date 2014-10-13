@@ -1,5 +1,4 @@
-# coding:utf-8
-
+#coding:utf-8
 import urllib
 import urllib2
 import cookielib
@@ -21,13 +20,8 @@ def login():
     return html.read()
 
 def find_img_url(page):
-#     match = re.findall(r'<title>(.*?)</title>', start_page, re.S)
     match = re.findall(r'&nbsp;<a href="(http://[^3].*?)">.*?</a>', page.decode("utf-8"), re.S)
-#     if match != []:
     url = match[0]
-#     else:
-#         match = re.findall(r'<a href="(http://fmn.xnpic.com/.*?)">.*?</a>', page.decode("utf-8"), re.S)
-#         url = match[0]
     return url
 
 def find_page_num(page):
@@ -35,20 +29,33 @@ def find_page_num(page):
     page_num = match[0]
     return page_num
 
-def download(url,cur_page_num):
-    urllib.urlretrieve(url,cur_page_num+'.jpg')
+def download(url,str_page_num):
+    urllib.urlretrieve(url,str_page_num+'.jpg')
     
 def find_next(page):
     match = re.findall(r'</p></div><div class="sec"><a href="(http://3g.renren.com/album/.*?)">.*?</a>', page.decode("utf-8"), re.S)
     next_url = match[0]
     return next_url
 
+def get_name(page,int_page_num):
+    f = open("aa"+'.txt','a')
+    match = re.findall(r'<img src=".*?" align="" alt=".*?" class=""/></a><p>(.*?)<br />', page.decode("utf-8"), re.S)
+    name = match[0]
+    temp = re.findall(r'<a href=.*?', name, re.S)
+    if(temp != []):
+        name = ""
+    else:
+        name = name.encode('utf-8')
+        f.write(str(int_page_num) + name + "\n\n")
+    f.close()
+
 if __name__ == '__main__':
     login()
 
-#     start_url shoule be the url of the first pic, not the url of the album
+#     start_url should be the url of the first pic, not the url of the album
     start_url = ""
     start_page = urllib2.urlopen(start_url).read()
+#     print start_page
     str_page_num = find_page_num(start_page)
     
     int_page_num = int(str_page_num)
@@ -56,6 +63,7 @@ if __name__ == '__main__':
     while int_page_num !=  0:
         img_url = find_img_url(cur_page)
         download(img_url, str(int_page_num))
+        get_name(cur_page,int_page_num)
         next_url = find_next(cur_page)
         next_url = next_url.replace('&amp;','&')
         cur_page = urllib2.urlopen(next_url).read()
