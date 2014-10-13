@@ -38,7 +38,7 @@ def find_next(page):
     return next_url
 
 def get_name(page,int_page_num):
-    f = open("aa"+'.txt','a')
+    f = open("Comments"+'.txt','a')
     match = re.findall(r'<img src=".*?" align="" alt=".*?" class=""/></a><p>(.*?)<br />', page.decode("utf-8"), re.S)
     name = match[0]
     temp = re.findall(r'<a href=.*?', name, re.S)
