@@ -6,13 +6,15 @@ import re
 import os
 
 def login():
+    #Test account
     xn={}
-    xn['email']='lingboling1991@yeah.net'
-    xn['password']='123456'
-    
+    xn['email']=''
+    xn['password']=''
+        
+    #In-use account
 #     xn={}
-#     xn['email']='lingboling1991@126.com'
-#     xn['password']='lcw@bupt'
+#     xn['email']=''
+#     xn['password']=''
     
     cookie=cookielib.CookieJar()
     opener=urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
@@ -65,7 +67,7 @@ if __name__ == '__main__':
     login()
 
 #     start_url should be the url of the first pic, not the url of the album
-    start_url = "http://3g.renren.com/album/wgetphoto.do?id=5784151942&albumid=356934022&owner=316312841&ret=profile.do%3Fid%3D316312841-n-%E8%87%A7%E4%BA%9A%E5%BC%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5-n-0-u-album%2Fwmyalbum.do%3Fid%3D316312841%26amp%3Bhtf%3D38-n-%E8%87%A7%E4%BA%9A%E5%BC%BA%E7%9A%84%E7%9B%B8%E5%86%8C-n-0-u-album%2Fwmyalbum.do%3Fcurpage%3D1%26amp%3Bid%3D316312841-n-%E8%87%A7%E4%BA%9A%E5%BC%BA%E7%9A%84%E7%9B%B8%E5%86%8C-n-0-u-album%2Fwgetalbum.do%3Fid%3D356934022%26owner%3D316312841-n-%E8%AF%A5%E7%9B%B8%E5%86%8C-n-0&sid=JBAEKOc0Ez4rR_udAYOa2Y&d4a5vo"
+    start_url = ""
     start_page = urllib2.urlopen(start_url).read()
 #     print start_page
     str_page_num = find_page_num(start_page)
