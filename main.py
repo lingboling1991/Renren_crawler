@@ -65,7 +65,6 @@ def get_ablum_name(page):
 
 if __name__ == '__main__':
     login()
-
 #     start_url should be the url of the first pic, not the url of the album
     start_url = ""
     start_page = urllib2.urlopen(start_url).read()
